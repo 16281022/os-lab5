@@ -7,7 +7,7 @@
 * 软件：vs<br>
 ## 三、实验内容<br>
 ### 1.基本结构
-![input_txt](111111)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/1.png)<br><br>
 ### 2.对磁盘操作<br>
 * 实验思路<br>
 实际物理磁盘的结构是多维的：有柱面、磁头、扇区等概念。I/O系统的任务是隐藏磁盘的结构细节，把磁盘以逻辑块的面目呈现给文件系统。逻辑块顺序编号，编号取值范围为0至L−1，其中L表示磁盘的存储块总数。实验中，我们可以利用数组ldisk[C][H][B]构建磁盘模型，其中CHB 分别表示柱面号，磁头号和扇区号。每个扇区大小为512字节。I/O系统从文件系统接收命令，根据命令指定的逻辑块号把磁盘块的内容读入命令指定的内存区域，或者把命令指定的内存区域内容写入磁盘块。<br>
@@ -20,20 +20,20 @@
 ### 3.文件系统组织结构<br>
 * 实验思路<br>
 磁盘的前k个块是保留区，其中包含如下信息：<br>
-![input_txt](22222)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/2.png)<br><br>
 位图和文件描述符。位图用来描述磁盘块的分配情况。位图中的每一位对应一个逻辑块。创建或者删除文件，以及文件的长度发生变化时，文件系统都需要进行位图操作。<br>
 前k个块的剩余部分包含一组文件描述符。每个文件描述符包含如下信息：<br>
   * 文件长度，单位字节<br>
   * 文件分配到的磁盘块号数组。该数组的长度是一个系统参数。<br>
 * 代码解释<br>
-![input_txt](44444)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/4.png)<br><br>
 ### 4.文件目录<br>
 * 实验思路<br>
 文件系统中仅设置一个目录，该目录包含文件系统中的所有文件。除了不需要显示地创建和删除之外，目录在很多方面和普通文件相像。目录对应0号文件描述符。初始状态下，目录中没有文件，所有，目录对应的描述符中记录的长度应为0，而且也没有分配磁盘块。每创建一个文件，目录文件的长度便增加一分。<br>目录文件的内容由一系列的目录项组成，其中每个目录项由如下内容组成：<br>
   * 文件名<br>
 • * 文件描述符序号<br>
 * 代码解释<br>
-![input_txt](33333)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/3.png)<br><br>
 ### 5.对文件操作<br>
 * 文件的创建int create(char *)<br>
 找一空闲文件描述符,在文件目录里为新创建的文件分配一个目录项，（可能需要为目录文件分配新的磁盘块）,在分配到的目录项里记录文件名以及描述符编号,返回状态信息。<br>
@@ -51,22 +51,22 @@
 把文件的读写指针移动到pos 指定的位置。pos是一个整数，表示从文件开始位置的偏移量。文件打开时，读写指针自动设置为0。每次读写操作之后，它指向最后被访问的字节的下一个位置。lseek 能够在不进行读写操作的情况下改变读写指针能位置。<br>
 ## 四、实验过程<br>
 * 菜单驱动系统<br>
-![input_txt](5555)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/5.png)<br><br>
 * 新建文件操作<br>
-![input_txt](6666)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/6.png)<br><br>
 * 显示目录文件<br>
-![input_txt](7777)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/7.png)<br><br>
 * 删除文件<br>
-![input_txt](8888)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/8.png)<br><br>
 * 打开文件<br>
-![input_txt](9999)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/9.png)<br><br>
 * 写操作<br>
-![input_txt](1010)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/10.png)<br><br>
 * 关闭文件<br>
-![input_txt](11111)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/11.png)<br><br>
 * 读操作<br>
-![input_txt](12)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/12.png)<br><br>
 * 查看磁盘数组内容<br>
-![input_txt](13)<br><br>
+![input_txt](https://github.com/16281022/os-lab5-/blob/master/13.png)<br><br>
 ## 五、实验心得<br>
 本次实验，通过实际操作，让我对操作系统实验——文件系统有了进一步的认识，结合老师上课所讲的内容，对文件系统有了更深刻的理解，并学习了其组织结构、与I/O接口 、与用户接口的操作，从而进一步的深刻理解操作系统的内容，同时也发现自己的知识储备还不够，仍要继续学习。<br>
